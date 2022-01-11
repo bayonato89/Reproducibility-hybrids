@@ -26,7 +26,7 @@ conda activate gji-hybrids
 conda install --channel conda-forge numpy=1.21.5 pycsep=0.5.0
 ```
 
-In addition, the user must have access to a Unix shell that has python3 intsalled with the `requests` library (it should be provided with pycsep=0.5.0). If not, she/he can install this library using:
+In addition, the user must have access to a Unix shell that has python3 installed with the `requests` library (it should be provided with pycsep=0.5.0). If not, she/he can install this library using:
 
 ```
 conda install requests
