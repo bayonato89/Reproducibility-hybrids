@@ -149,7 +149,7 @@ HKJ_inPIf = csep.load_gridded_forecast(HKJ_in_PI, start_date=start_date, end_dat
 # In[ ]:
 
 
-print('Importing the target earthquake catalog..')
+print('Importing the target earthquake catalog...')
 
 
 # In[8]:
