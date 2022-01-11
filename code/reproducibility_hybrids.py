@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # This Jupyter notebook reproduces the results reported by Bayona et al. (GJI, in review) on the prospective evaluation of RELM and multiplicative earthquake forecasting models for California
+# # This Jupyter notebook reproduces the results reported by Bayona et al. (2022) on the prospective evaluation of RELM and multiplicative earthquake forecasting models for California
 
 # ### Authors: Toño Bayona, Bill Savran and Pablito Iturrieta. 
-# ### Last update: 30 December, 2021.
+# ### Last update: January 10, 2021.
 
 # In[1]:
 
@@ -40,6 +40,12 @@ warnings.filterwarnings('ignore')
 
 
 # ### Forecasts:
+
+# In[ ]:
+
+
+print('Importing earthquake forecasts for prospective evaluation...')
+
 
 # In[3]:
 
@@ -140,120 +146,111 @@ HKJ_inPIf = csep.load_gridded_forecast(HKJ_in_PI, start_date=start_date, end_dat
 
 # ## Testing datasets:
 
-# In[11]:
+# In[ ]:
 
 
-# Earthquake catalog with the CSEP-California testing region:
-catalog_Cali1 = csep.query_comcat(Bird_f.start_time, Bird_f.end_time, min_magnitude = Bird_f.min_magnitude)
+print('Importing the target earthquake catalog..')
 
 
-# In[12]:
-
-
-# The user can download the catalog and then save it:
-with open('./data/catalog_ANSS.obj', 'wb') as obj:
-    pickle.dump(catalog_Cali1, obj)
-
-
-# In[13]:
+# In[8]:
 
 
 with open('./data/catalog_ANSS.obj', 'rb') as obj:
     cat = pickle.load(obj)
 
 
-# In[14]:
+# In[9]:
 
 
 catalog_Cali2 = cat.filter_spatial(region=Bird_f.region, update_stats=False, in_place=True) # Bird region
 
 
-# In[15]:
+# In[10]:
 
 
 with open('./data/catalog_ANSS.obj', 'rb') as obj:
     cat = pickle.load(obj)
 
 
-# In[16]:
+# In[11]:
 
 
 catalog_CaliP2 = cat.filter_spatial(region=PI_PIf.region, update_stats=False, in_place=True) # PI region
 
 
-# In[17]:
+# In[12]:
 
 
 with open('./data/catalog_ANSS.obj', 'rb') as obj:
     cat = pickle.load(obj)
 
 
-# In[18]:
+# In[13]:
 
 
 catalog_Ebel = cat.filter_spatial(region=Ebel_cf.region, update_stats=False, in_place=True) # Ebel region
 
 
+# In[14]:
+
+
+with open('./data/catalog_ANSS.obj', 'rb') as obj:
+    cat = pickle.load(obj)
+
+
+# In[15]:
+
+
+catalog_Kagan = cat.filter_spatial(region=Kagan_f.region, update_stats=False, in_place=True) # Kagan region
+
+
+# In[16]:
+
+
+with open('./data/catalog_ANSS.obj', 'rb') as obj:
+    cat = pickle.load(obj)
+
+
+# In[17]:
+
+
+catalog_Kagan = cat.filter_spatial(region=Kagan_f.region, update_stats=False, in_place=True) # Kagan region
+
+
+# In[18]:
+
+
+with open('./data/catalog_ANSS.obj', 'rb') as obj:
+    cat = pickle.load(obj)
+
+
 # In[19]:
-
-
-with open('./data/catalog_ANSS.obj', 'rb') as obj:
-    cat = pickle.load(obj)
-
-
-# In[20]:
-
-
-catalog_Kagan = cat.filter_spatial(region=Kagan_f.region, update_stats=False, in_place=True) # Kagan region
-
-
-# In[21]:
-
-
-with open('./data/catalog_ANSS.obj', 'rb') as obj:
-    cat = pickle.load(obj)
-
-
-# In[22]:
-
-
-catalog_Kagan = cat.filter_spatial(region=Kagan_f.region, update_stats=False, in_place=True) # Kagan region
-
-
-# In[23]:
-
-
-with open('./data/catalog_ANSS.obj', 'rb') as obj:
-    cat = pickle.load(obj)
-
-
-# In[24]:
 
 
 catalog_HKJ_Kagan = cat.filter_spatial(region=HKJ_Kaganf.region, update_stats=False, in_place=True) # HKJ_Kagan region
 
 
-# In[25]:
+# In[20]:
 
 
 with open('./data/catalog_ANSS.obj', 'rb') as obj:
     cat = pickle.load(obj)
 
 
-# In[26]:
+# In[21]:
 
 
 catalog_Shen= cat.filter_spatial(region=Shen_f.region, update_stats=False, in_place=True) # Shen region
 
 
-# In[27]:
+# In[22]:
 
 
 with open('./data/catalog_ANSS.obj', 'rb') as obj:
     cat = pickle.load(obj)
 
 
-# In[28]:
+# In[23]:
 
 
 catalog_Ward= cat.filter_spatial(HKJ_Ward_combof.region, update_stats=False, in_place=True) # Ward region
@@ -261,7 +258,13 @@ catalog_Ward= cat.filter_spatial(HKJ_Ward_combof.region, update_stats=False, in_
 
 # ## Forecast maps:
 
-# In[26]:
+# In[ ]:
+
+
+print ('Plotting earthquake forecasts and testing catalog on separate maps...')
+
+
+# In[24]:
 
 
 def _get_basemap(basemap):
@@ -290,7 +293,7 @@ def _get_basemap(basemap):
     return tiles
 
 
-# In[27]:
+# In[25]:
 
 
 fig = plt.figure(figsize=(12.5,15.5))
@@ -453,7 +456,7 @@ plt.savefig('./output/Fig1.png', dpi=150, bbox_inches = 'tight')
 
 # #### Fig. 1: Original RELM models submitted to the mainshock+aftershock class of CSEP: a) HKJ, b) BIRD, c)EBEL-C, d) PI, e) KAGAN, f) SHEN. Expected number of M$\geq$4.95 earthquakes are shown per 0.1$^{\circ} \times$ 0.1$^{\circ}$ unit area per decade.
 
-# In[28]:
+# In[26]:
 
 
 fig = plt.figure(figsize=(20,20))
@@ -650,7 +653,7 @@ scatter = ax_HKJ_PI_sca.scatter(HKJ_PI_scaf.get_longitudes()+dh/2, HKJ_PI_scaf.g
 plt.savefig('./output/Fig2_top.png', dpi=150, bbox_inches = 'tight')
 
 
-# In[29]:
+# In[27]:
 
 
 fig = plt.figure(figsize=(20,17))
@@ -854,7 +857,7 @@ plt.savefig('./output/Fig2_bottom.png', dpi=150, bbox_inches = 'tight')
 
 # #### Fig. 2: Hybrid earthquake models for California and southern California, constructed by Rhoades et al. (2014). These ensembles involve the HKJ model of Helmstetter et al. (2007) as baseline, and the ALM (Wiemer and Schorlemmer, 2007), BIRD (Bird and Liu, 2007), PI (Holliday et al., 2007), (corrected) EBEL-C (Ebel et al., 2007), KAGAN (Kagan et al., 2007), SHEN  (Shen et al., 2007), and WARD-COMBO, WARD-GEOD81, WARD-GEOD85, WARD-GEOL, WARD-SEIS, WARD-SIM (Ward, 2007) conjugate models.
 
-# In[30]:
+# In[28]:
 
 
 def plot_forecast(forecast, catalog):
@@ -904,7 +907,7 @@ def plot_forecast(forecast, catalog):
     return ax
 
 
-# In[31]:
+# In[29]:
 
 
 fig = plt.figure(figsize=(10,20))
@@ -914,7 +917,13 @@ plt.savefig('./output/Fig3.png', dpi=150, bbox_inches = 'tight')
 
 # #### Fig. 3: Hypocentral locations of M$\geq$4.95 earthquakes observed in the CSEP-California testing region during the 2011-2020 prospective evaluation period of this study. We include a forecast map, showing the estimates of earthquake rate densities per decade provided by the baseline HKJ model.
 
-# In[47]:
+# In[ ]:
+
+
+print ('Estimating correlations between consistency tests...')
+
+
+# In[30]:
 
 
 def _simulate_catalog(num_events, sampling_weights, sim_fore, random_numbers=None):
@@ -939,7 +948,7 @@ def _simulate_catalog(num_events, sampling_weights, sim_fore, random_numbers=Non
     return sim_fore
 
 
-# In[48]:
+# In[31]:
 
 
 sampling_weights = numpy.cumsum(HKJ_f.data.ravel()) / numpy.sum(HKJ_f.data)
@@ -953,7 +962,7 @@ for i in range(0,1000):
     sim_cat[:,i] = _simulate_catalog(num_events_to_simulate[i], sampling_weights, sim_fore, random_numbers=None)
 
 
-# In[35]:
+# In[32]:
 
 
 def _number_test_ndarray(fore_cnt, obs_cnt, epsilon=1e-6):
@@ -972,7 +981,7 @@ def _number_test_ndarray(fore_cnt, obs_cnt, epsilon=1e-6):
     return delta1, delta2
 
 
-# In[36]:
+# In[33]:
 
 
 def number_test(gridded_forecast, observed_catalog):
@@ -1020,7 +1029,7 @@ def number_test(gridded_forecast, observed_catalog):
     return result
 
 
-# In[37]:
+# In[34]:
 
 
 data_n = []
@@ -1029,7 +1038,7 @@ for i in range(1000):
     data_n.append(number_test(HKJ_f, sim_cat[:,i]))
 
 
-# In[38]:
+# In[35]:
 
 
 q_n = []
@@ -1042,7 +1051,7 @@ for i in range(len(data_n)):
     q_nd2.append(q_n[i][1])
 
 
-# In[43]:
+# In[36]:
 
 
 def _poisson_likelihood_test(forecast_data, observed_data, num_simulations=1000, random_numbers=None,
@@ -1130,7 +1139,7 @@ def _poisson_likelihood_test(forecast_data, observed_data, num_simulations=1000,
     return qs, obs_ll, simulated_ll
 
 
-# In[52]:
+# In[37]:
 
 
 def spatial_test(gridded_forecast, observed_catalog, num_simulations=1000, seed=None, random_numbers=None,
@@ -1182,7 +1191,7 @@ def spatial_test(gridded_forecast, observed_catalog, num_simulations=1000, seed=
     return result
 
 
-# In[53]:
+# In[38]:
 
 
 data_s = []
@@ -1190,7 +1199,7 @@ for i in range(1000):
     data_s.append(spatial_test(HKJ_f, np.reshape(sim_cat[:,i],(7682, 41)).sum(axis=1), seed=seed, num_simulations=1000))
 
 
-# In[54]:
+# In[39]:
 
 
 q_s = []
@@ -1199,7 +1208,7 @@ for i in range(len(data_s)):
     q_s.append(data_s[i].quantile)
 
 
-# In[50]:
+# In[40]:
 
 
 def magnitude_test(gridded_forecast, observed_catalog, num_simulations=1000, seed=None, random_numbers=None,
@@ -1248,7 +1257,7 @@ def magnitude_test(gridded_forecast, observed_catalog, num_simulations=1000, see
     return result
 
 
-# In[51]:
+# In[41]:
 
 
 data_m = []
@@ -1256,7 +1265,7 @@ for i in range(1000):
     data_m.append(magnitude_test(HKJ_f, np.reshape(sim_cat[:,i],(7682, 41)).sum(axis=0), seed=seed, num_simulations=1000))
 
 
-# In[55]:
+# In[42]:
 
 
 def conditional_likelihood_test(gridded_forecast, observed_catalog, num_simulations=1000, seed=None,
@@ -1306,7 +1315,7 @@ def conditional_likelihood_test(gridded_forecast, observed_catalog, num_simulati
     return result
 
 
-# In[56]:
+# In[43]:
 
 
 data_cl = []
@@ -1314,7 +1323,7 @@ for i in range(1000):
     data_cl.append(conditional_likelihood_test(HKJ_f, sim_cat[:,i], seed=seed, num_simulations=1000))
 
 
-# In[58]:
+# In[44]:
 
 
 q_cl = []
@@ -1323,7 +1332,7 @@ for i in range(len(data_cl)):
     q_cl.append(data_cl[i].quantile)
 
 
-# In[59]:
+# In[45]:
 
 
 fig, ax = plt.subplots(figsize=(7,5))
@@ -1347,7 +1356,7 @@ ax.set_ylim(-0.05,1.05)
 plt.savefig('./output/Fig4a.png', dpi=150, bbox_inches = 'tight')
 
 
-# In[60]:
+# In[46]:
 
 
 fig, ax = plt.subplots(figsize=(7,5))
@@ -1371,7 +1380,7 @@ ax.set_ylim(-0.05,1.05)
 plt.savefig('./output/Fig4b.png', dpi=150, bbox_inches = 'tight')
 
 
-# In[61]:
+# In[47]:
 
 
 fig, ax = plt.subplots(figsize=(7,5))
@@ -1396,11 +1405,17 @@ plt.savefig('./output/Fig4c.png', dpi=150, bbox_inches = 'tight')
 
 # ## Consistency tests:
 
+# In[ ]:
+
+
+print ('Conducting consistency tests...')
+
+
 # ### N tests:
 
 # #### Poisson N-test:
 
-# In[68]:
+# In[48]:
 
 
 # Number-tests for earthquake forecasts in California:
@@ -1430,7 +1445,7 @@ ntest_HKJ_Ward_seis = poisson.number_test(HKJ_Ward_seisf, catalog_Ward)
 ntest_HKJ_Ward_sim = poisson.number_test(HKJ_Ward_simf, catalog_Ward)
 
 
-# In[39]:
+# In[49]:
 
 
 def _get_marker_style(obs_stat, p, one_sided_lower):
@@ -1449,7 +1464,7 @@ def _get_marker_style(obs_stat, p, one_sided_lower):
     return fmt
 
 
-# In[40]:
+# In[50]:
 
 
 def _get_axis_limits(pnts, border=0.05):
@@ -1460,7 +1475,7 @@ def _get_axis_limits(pnts, border=0.05):
     return (x_min-xd, x_max+xd)
 
 
-# In[41]:
+# In[51]:
 
 
 def plot_consistency_test(eval_results, normalize=False, one_sided_lower=True, plot_args=None, variance=None):
@@ -1615,7 +1630,7 @@ def plot_consistency_test(eval_results, normalize=False, one_sided_lower=True, p
     return ax
 
 
-# In[82]:
+# In[52]:
 
 
 plt.figure()
@@ -1637,25 +1652,25 @@ for i in range(len(poisson_Ntests)):
     pn_values.append(poisson_Ntests[i].quantile[1] * 2.0)
     
     ax_n.errorbar(poisson_Ntests[i].observed_statistic, 21 - i, xerr=numpy.array([[low97, high97]]).T, capsize=4, 
-                  color='slategray', alpha=1.0, zorder=0)
+                  color='slategray', alpha=1.0, zorder=0)            
         
-    if pn_values[i] < 10e-4:
+    if pn_values[i] < 10e-5:
          ax_n.plot(poisson_Ntests[i].observed_statistic, 21 - i, marker='o', color = 'red', markersize= 8, zorder=2)
     
-    if pn_values[i] >= 10e-4 and pn_values[i] < 10e-3:
+    if pn_values[i] >= 10e-5 and pn_values[i] < 10e-4:
          ax_n.plot(poisson_Ntests[i].observed_statistic, 21 - i, marker='o', color = '#FF7F50', markersize= 8, zorder=2)
         
-    if pn_values[i] >= 10e-3 and pn_values[i] < 10e-2:
+    if pn_values[i] >= 10e-4 and pn_values[i] < 10e-3:
          ax_n.plot(poisson_Ntests[i].observed_statistic, 21 - i, marker='o', color = 'gold', markersize= 8, zorder=2)
         
-    if pn_values[i] >= 10e-2 and pn_values[i] < 0.0125:
+    if pn_values[i] >= 10e-3 and pn_values[i] < 0.0125:
         ax_n.plot(poisson_Ntests[i].observed_statistic, 21 - i, marker='o', color = 'white', markersize= 8, zorder=2)
         
-    if pn_values[i] >= 0.125 and pn_values[i] < 0.25:
+    if pn_values[i] >= 0.0125 and pn_values[i] < 0.025:
         ax_n.plot(poisson_Ntests[i].observed_statistic, 21 - i, marker='o', color = 'skyblue', markersize= 8, zorder=2)    
     
-    if pn_values[i] > 0.25:
-         ax_n.plot(poisson_Ntests[i].observed_statistic, 21 - i, marker='o', color = '#069AF3', markersize= 8, zorder=2)
+    if pn_values[i] >= 0.025:
+         ax_n.plot(poisson_Ntests[i].observed_statistic, 21 - i, marker='o', color = 'blue', markersize= 8, zorder=2)
     
 ax_n.set_xlim(0.0,200)
 ax_n.set_title('')
@@ -1669,7 +1684,7 @@ plt.savefig('./output/Fig5a.png', dpi=150, bbox_inches = 'tight')
 
 # #### NBD N-test:
 
-# In[70]:
+# In[53]:
 
 
 # We use the historical ANSS catalog to fit a negative binomial distribution (NBD) to the number distribution
@@ -1684,7 +1699,7 @@ var_Shen = rates.Shen.var()
 var_Ward = rates.Ward.var()
 
 
-# In[71]:
+# In[54]:
 
 
 def _nbd_number_test_ndarray(fore_cnt, obs_cnt, variance, epsilon=1e-6):
@@ -1709,7 +1724,7 @@ def _nbd_number_test_ndarray(fore_cnt, obs_cnt, variance, epsilon=1e-6):
     return delta1, delta2
 
 
-# In[74]:
+# In[55]:
 
 
 def number_test_nbd(gridded_forecast, observed_catalog, variance):
@@ -1759,7 +1774,7 @@ def number_test_nbd(gridded_forecast, observed_catalog, variance):
     return result
 
 
-# In[179]:
+# In[56]:
 
 
 # HKJ/ California testing region:
@@ -1790,7 +1805,7 @@ NBD_HKJ_Ward_seis = number_test_nbd(HKJ_Ward_seisf, catalog_Ward, var_Ward)
 NBD_HKJ_Ward_sim = number_test_nbd(HKJ_Ward_simf, catalog_Ward, var_Ward)
 
 
-# In[180]:
+# In[57]:
 
 
 plt.figure()
@@ -1837,30 +1852,30 @@ for i in range(len(nbd_Ntests)):
     ax_nb.errorbar(nbd_Ntests[i].observed_statistic, 21 - i, xerr=numpy.array([[low97, high97]]).T, capsize=4, 
                   color='slategray', alpha=1.0, zorder=0)
     
-    if pnb_values[i] <= 10e-4:
+    if pnb_values[i] < 10e-5:
          ax_nb.plot(nbd_Ntests[i].observed_statistic, 21 - i, marker='o', color = 'red', markersize= 8, zorder=2)
     
-    if pnb_values[i] > 10e-4 and pnb_values[i] <= 10e-3:
+    if pnb_values[i] >= 10e-5 and pnb_values[i] < 10e-4:
          ax_nb.plot(nbd_Ntests[i].observed_statistic, 21 - i, marker='o', color = '#FF7F50', markersize= 8, zorder=2)
         
-    if pnb_values[i] > 10e-3 and pnb_values[i] <= 0.0125:
+    if pnb_values[i] >= 10e-4 and pnb_values[i] < 10e-3:
          ax_nb.plot(nbd_Ntests[i].observed_statistic, 21 - i, marker='o', color = 'gold', markersize= 8, zorder=2)
         
-    if pnb_values[i] > 0.0125 and pnb_values[i] <= 0.025:
+    if pnb_values[i] >= 10e-3 and pnb_values[i] < 0.0125:
         ax_nb.plot(nbd_Ntests[i].observed_statistic, 21 - i, marker='o', color = 'white', markersize= 8, zorder=2)
         
-    if pnb_values[i] > 0.025 and pnb_values[i] <= 0.05:
+    if pnb_values[i] >= 0.0125 and pnb_values[i] < 0.025:
         ax_nb.plot(nbd_Ntests[i].observed_statistic, 21 - i, marker='o', color = 'skyblue', markersize= 8, zorder=2)    
     
-    if pnb_values[i] > 0.05:
+    if pnb_values[i] >= 0.025:
          ax_nb.plot(nbd_Ntests[i].observed_statistic, 21 - i, marker='o', color = 'blue', markersize= 8, zorder=2)
             
-legend_elements = [Line2D([0], [0], marker='o', color='red', lw=0, label=r'p < 10e-4', markersize=10, markeredgecolor='k'),
-                   Line2D([0], [0], marker='o', color='#FF7F50', lw=0, label=r'10e-4 $\leq$ p < 10e-3', markersize=10, markeredgecolor='k'),
-                   Line2D([0], [0], marker='o', color='gold', lw=0, label=r'10e-3 $\leq$ p < 0.0125', markersize=10, markeredgecolor='k'),
-                   Line2D([0], [0], marker='o', color='white', lw=0, label=r'0.0125 $\leq$ p < 0.025', markersize=10, markeredgecolor='k'),
-                   Line2D([0], [0], marker='o', color='skyblue', lw=0, label=r'0.025 $\leq$ p < 0.05', markersize=10, markeredgecolor='k'),
-                   Line2D([0], [0], marker='o', color='blue', lw=0, label=r'p $\geq$ 0.05', markersize=10, markeredgecolor='k')]
+legend_elements = [Line2D([0], [0], marker='o', color='red', lw=0, label=r'p < 10e-5', markersize=10, markeredgecolor='k'),
+                   Line2D([0], [0], marker='o', color='#FF7F50', lw=0, label=r'10e-5 $\leq$ p < 10e-4', markersize=10, markeredgecolor='k'),
+                   Line2D([0], [0], marker='o', color='gold', lw=0, label=r'10e-4 $\leq$ p < 10e-3', markersize=10, markeredgecolor='k'),
+                   Line2D([0], [0], marker='o', color='white', lw=0, label=r'10e-3 $\leq$ p < 0.0125', markersize=10, markeredgecolor='k'),
+                   Line2D([0], [0], marker='o', color='skyblue', lw=0, label=r'0.0125 $\leq$ p < 0.025', markersize=10, markeredgecolor='k'),
+                   Line2D([0], [0], marker='o', color='blue', lw=0, label=r'p $\geq$ 0.025', markersize=10, markeredgecolor='k')]
 
 ax_nb.legend(handles=legend_elements, loc=4, fontsize=13, edgecolor='k')              
 
@@ -1876,13 +1891,13 @@ plt.savefig('./output/Fig5b.png', dpi=150, bbox_inches = 'tight')
 
 # #### Fig. 5: Results of the prospective a) Poisson and b) NBD N-tests during the 2011-2020 evaluation period. The circles represent the number of observed earthquakes and the colors denote the calculated p-values for earthquake forecasting models, obtained from the equation p-value = 2 $\cdot$ min (P(X) $\leq$ x, P(X) > x) proposed by Meletti et al. (2021). Blue colors indicate consistencies between forecasts and the observations and red-ornage colors indicate the opposite. Solid black and gray bars depict the 95% and 97.5% predicitve intervals of the model forecast likelihood distributions. Horizontal dashed lines separate different testing regions. The EBEL-C predictive range is too large to be shown.
 
-# In[85]:
+# In[58]:
 
 
 nbd = pd.read_csv('./data/BND_database1936_10yr.txt', sep='\t', skiprows=0) 
 
 
-# In[86]:
+# In[59]:
 
 
 fig, ax = plt.subplots(figsize=(7,4.5))
@@ -1909,13 +1924,13 @@ ax.text(-0.65, 95, 'a)', fontsize =18, color='black')
 plt.savefig('./output/Fig6a.png', dpi=150, bbox_inches = 'tight')
 
 
-# In[87]:
+# In[60]:
 
 
 nbd_sc = pd.read_csv('./data/BND_database1936_sC_10yr.txt', sep='\t', skiprows=0) 
 
 
-# In[88]:
+# In[61]:
 
 
 fig, ax = plt.subplots(figsize=(7,4.5))
@@ -1951,7 +1966,7 @@ plt.savefig('./output/Fig6b.png', dpi=150, bbox_inches = 'tight')
 
 # #### Poisson S-test:
 
-# In[37]:
+# In[62]:
 
 
 # Spatial-tests for earthquake forecasts in California:
@@ -1981,7 +1996,7 @@ stest_HKJ_Ward_seis = poisson.spatial_test(HKJ_Ward_seisf, catalog_Ward, seed=se
 stest_HKJ_Ward_sim = poisson.spatial_test(HKJ_Ward_simf, catalog_Ward, seed=seed)
 
 
-# In[42]:
+# In[63]:
 
 
 plt.figure()
@@ -2002,30 +2017,30 @@ for i in range(len(poisson_Stests)):
     ax_s.errorbar(poisson_Stests[i].observed_statistic, 21 -i, xerr=numpy.array([[low97, high97]]).T, capsize=4, 
                   color='slategray', alpha=1.0, zorder=0)
 
-    if poisson_Stests[i].quantile < 10e-4:
+    if poisson_Stests[i].quantile < 10e-5:
          ax_s.plot(poisson_Stests[i].observed_statistic, 21 - i, marker='o', color = 'red', markersize= 8, zorder=2)
     
-    if poisson_Stests[i].quantile >= 10e-4 and poisson_Stests[i].quantile < 10e-3:
+    if poisson_Stests[i].quantile >= 10e-5 and poisson_Stests[i].quantile < 10e-4:
          ax_s.plot(poisson_Stests[i].observed_statistic, 21 - i, marker='o', color = '#FF7F50', markersize= 8, zorder=2)
         
-    if poisson_Stests[i].quantile >= 10e-3 and poisson_Stests[i].quantile < 10e-2:
+    if poisson_Stests[i].quantile >= 10e-4 and poisson_Stests[i].quantile < 10e-3:
          ax_s.plot(poisson_Stests[i].observed_statistic, 21 - i, marker='o', color = 'gold', markersize= 8, zorder=2)
         
-    if poisson_Stests[i].quantile >= 10e-2 and poisson_Stests[i].quantile < 0.025:
-        ax_s.plot(S_tests[i].observed_statistic, 21 - i, marker='o', color = 'white', markersize= 8, zorder=2)
+    if poisson_Stests[i].quantile >= 10e-3  and poisson_Stests[i].quantile < 0.025:
+        ax_s.plot(poisson_Stests[i].observed_statistic, 21 - i, marker='o', color = 'white', markersize= 8, zorder=2)
         
     if poisson_Stests[i].quantile >= 0.025 and poisson_Stests[i].quantile < 0.05:
         ax_s.plot(poisson_Stests[i].observed_statistic, 21 - i, marker='o', color = 'skyblue', markersize= 8, zorder=2)    
     
-    if poisson_Stests[i].quantile > 0.05:
+    if poisson_Stests[i].quantile >= 0.05:
          ax_s.plot(poisson_Stests[i].observed_statistic, 21 - i, marker='o', color = 'blue', markersize= 8, zorder=2)  
     
-legend_elements = [Line2D([0], [0], marker='o', color='red', lw=0, label=r'p < 10e-4', markersize=10, markeredgecolor='k'),
-                   Line2D([0], [0], marker='o', color='#FF7F50', lw=0, label=r'10e-4 $\leq$ p < 10e-3', markersize=10, markeredgecolor='k'),
-                   Line2D([0], [0], marker='o', color='gold', lw=0, label=r'10e-3 $\leq$ p < 10e-2', markersize=10, markeredgecolor='k'),
-                   Line2D([0], [0], marker='o', color='white', lw=0, label=r'10e-2 $\leq$ p < 0.025', markersize=10, markeredgecolor='k'),
+legend_elements = [Line2D([0], [0], marker='o', color='red', lw=0, label=r'p < 10e-5', markersize=10, markeredgecolor='k'),
+                   Line2D([0], [0], marker='o', color='#FF7F50', lw=0, label=r'10e-5 $\leq$ p < 10e-4', markersize=10, markeredgecolor='k'),
+                   Line2D([0], [0], marker='o', color='gold', lw=0, label=r'10e-4 $\leq$ p < 10e-3', markersize=10, markeredgecolor='k'),
+                   Line2D([0], [0], marker='o', color='white', lw=0, label=r'10e-3 $\leq$ p < 0.025', markersize=10, markeredgecolor='k'),
                    Line2D([0], [0], marker='o', color='skyblue', lw=0, label=r'0.025 $\leq$ p < 0.05', markersize=10, markeredgecolor='k'),
-                   Line2D([0], [0], marker='o', color='blue', lw=0, label=r'p > 0.05', markersize=10, markeredgecolor='k')]
+                   Line2D([0], [0], marker='o', color='blue', lw=0, label=r'p $\geq$ 0.05', markersize=10, markeredgecolor='k')]
 
 ax_s.legend(handles=legend_elements, loc=3, fontsize=13, edgecolor='k')           
 
@@ -2040,7 +2055,7 @@ plt.savefig('./output/Fig7a.png', dpi=150, bbox_inches = 'tight')
 
 # #### Binary S-test:
 
-# In[43]:
+# In[64]:
 
 
 def binomial_joint_log_likelihood_ndarray(forecast, catalog):
@@ -2062,7 +2077,7 @@ def binomial_joint_log_likelihood_ndarray(forecast, catalog):
     return sum(first_term.data + second_term.data)
 
 
-# In[44]:
+# In[65]:
 
 
 def _binomial_likelihood_test(forecast_data, observed_data, num_simulations=1000, random_numbers=None, 
@@ -2138,7 +2153,7 @@ def _binomial_likelihood_test(forecast_data, observed_data, num_simulations=1000
     return qs, obs_ll, simulated_ll
 
 
-# In[45]:
+# In[66]:
 
 
 def spatial_test_bi(gridded_forecast, observed_catalog, num_simulations=1000, seed=None, random_numbers=None, verbose=False):
@@ -2185,7 +2200,7 @@ def spatial_test_bi(gridded_forecast, observed_catalog, num_simulations=1000, se
     return result    
 
 
-# In[51]:
+# In[67]:
 
 
 # Spatial-tests for earthquake forecasts in California
@@ -2211,11 +2226,11 @@ stest_HKJ_Ward_combo_bi = spatial_test_bi(HKJ_Ward_combof, catalog_Ward, seed=se
 stest_HKJ_Ward_geod81_bi = spatial_test_bi(HKJ_Ward_geod81f, catalog_Ward, seed=seed)
 stest_HKJ_Ward_geod85_bi = spatial_test_bi(HKJ_Ward_geod85f, catalog_Ward, seed=seed)
 stest_HKJ_Ward_geol_bi = spatial_test_bi(HKJ_Ward_geolf, catalog_Ward, seed=seed)
-stest_HKJ_Ward_seis_bi = spatial_test_bi(HKJ_Ward_seisf, catalog_Ward, seed=seed)
-stest_HKJ_Ward_sim_bi = spatial_test_bi(HKJ_Ward_simf, catalog_Ward, seed=seed)
+stest_HKJ_Ward_seis_bi = spatial_test_bi(HKJ_Ward_seisf, catalog_Ward)
+stest_HKJ_Ward_sim_bi = spatial_test_bi(HKJ_Ward_simf, catalog_Ward)
 
 
-# In[52]:
+# In[68]:
 
 
 plt.figure()
@@ -2238,22 +2253,22 @@ for i in range(len(S_tests_bi)):
     ax_s.errorbar(S_tests_bi[i].observed_statistic, 21 -i, xerr=numpy.array([[low97, high97]]).T, capsize=4, 
                   color='slategray', alpha=1.0, zorder=0)
         
-    if S_tests_bi[i].quantile < 10e-4:
+    if S_tests_bi[i].quantile < 10e-5:
          ax_s.plot(S_tests_bi[i].observed_statistic, 21 - i, marker='o', color = 'red', markersize= 8, zorder=2)
     
-    if S_tests_bi[i].quantile >= 10e-4 and S_tests_bi[i].quantile < 10e-3:
+    if S_tests_bi[i].quantile >= 10e-5 and S_tests_bi[i].quantile < 10e-4:
          ax_s.plot(S_tests_bi[i].observed_statistic, 21 - i, marker='o', color = '#FF7F50', markersize= 8, zorder=2)
         
-    if S_tests_bi[i].quantile >= 10e-3 and S_tests_bi[i].quantile < 10e-2:
+    if S_tests_bi[i].quantile >= 10e-4 and S_tests_bi[i].quantile < 10e-3:
          ax_s.plot(S_tests_bi[i].observed_statistic, 21 - i, marker='o', color = 'gold', markersize= 8, zorder=2)
         
-    if S_tests_bi[i].quantile >= 10e-2 and S_tests_bi[i].quantile < 0.025:
+    if S_tests_bi[i].quantile >= 10e-3 and S_tests_bi[i].quantile < 0.025:
         ax_s.plot(S_tests_bi[i].observed_statistic, 21 - i, marker='o', color = 'white', markersize= 8, zorder=2)
         
     if S_tests_bi[i].quantile >= 0.025 and S_tests_bi[i].quantile < 0.05:
         ax_s.plot(S_tests_bi[i].observed_statistic, 21 - i, marker='o', color = 'skyblue', markersize= 8, zorder=2)    
     
-    if S_tests_bi[i].quantile > 0.05:
+    if S_tests_bi[i].quantile >= 0.05:
          ax_s.plot(S_tests_bi[i].observed_statistic, 21 - i, marker='o', color = 'blue', markersize= 8, zorder=2)      
 
 
@@ -2269,7 +2284,7 @@ plt.savefig('./output/Fig7b.png', dpi=150, bbox_inches = 'tight')
 
 # #### Fig. 7: Results of tjhe one-sided S test for forecasts in California based on a) a Poisson and b) a binary likelihood function. Symbols depict observed joint (spatial) log-likelihood scores and the colors denote p-values calculated for each forecasting model. blue colors indicate consistencies between forecasts and the observations and red-orange colors indicate the opposite. Solid horizontal black and gray bars represent the 95% and 97.5% predictive intervals of the model forecast forecast probability distributions.
 
-# In[183]:
+# In[69]:
 
 
 def poisson_spatial_likelihood(forecast, catalog):
@@ -2300,13 +2315,13 @@ def poisson_spatial_likelihood(forecast, catalog):
     return poll
 
 
-# In[184]:
+# In[70]:
 
 
 POLL_HKJ = poisson_spatial_likelihood(HKJ_f, catalog_Cali2)
 
 
-# In[185]:
+# In[71]:
 
 
 def plot_spatial_likelihood(forecast, catalog, LL, markersizem, marker_sizeLL):
@@ -2377,7 +2392,7 @@ def plot_spatial_likelihood(forecast, catalog, LL, markersizem, marker_sizeLL):
     return ax_sl
 
 
-# In[186]:
+# In[72]:
 
 
 fig = plt.figure(figsize=(10,20))
@@ -2386,7 +2401,7 @@ ax_POLL_HKJ.text(-126.0, 43.5, 'a)', fontsize =18, color='black')
 plt.savefig('./output/Fig8a.png', dpi=150, bbox_inches = 'tight')
 
 
-# In[187]:
+# In[73]:
 
 
 def _binary_spatial_likelihood(forecast, catalog):
@@ -2426,13 +2441,13 @@ def _binary_spatial_likelihood(forecast, catalog):
     return bill
 
 
-# In[188]:
+# In[74]:
 
 
 BILL_HKJ = _binary_spatial_likelihood(HKJ_f, catalog_Cali2)
 
 
-# In[189]:
+# In[75]:
 
 
 fig = plt.figure(figsize=(10,20))
@@ -2447,7 +2462,7 @@ plt.savefig('./output/Fig8b.png', dpi=150, bbox_inches = 'tight')
 
 # Poisson cL-test:
 
-# In[207]:
+# In[76]:
 
 
 # Likelihood-tests for earthquake forecasts in California:
@@ -2477,7 +2492,7 @@ cltest_HKJ_Ward_seis = poisson.conditional_likelihood_test(HKJ_Ward_seisf, catal
 cltest_HKJ_Ward_sim = poisson.conditional_likelihood_test(HKJ_Ward_simf, catalog_Ward, seed=seed)
 
 
-# In[208]:
+# In[77]:
 
 
 plt.figure()
@@ -2499,31 +2514,31 @@ for i in range(len(cl_tests)):
     ax_cl.errorbar(cl_tests[i].observed_statistic, 21 -i, xerr=numpy.array([[low97, high97]]).T, capsize=4, 
                   color='slategray', alpha=1.0, zorder=0) 
         
-    if cl_tests[i].quantile < 10e-4:
+    if cl_tests[i].quantile < 10e-5:
          ax_cl.plot(cl_tests[i].observed_statistic, 21 - i, marker='o', color = 'red', markersize= 8, zorder=2)
     
-    if cl_tests[i].quantile >= 10e-4 and cl_tests[i].quantile < 10e-3:
+    if cl_tests[i].quantile >= 10e-5 and cl_tests[i].quantile < 10e-4:
          ax_cl.plot(cl_tests[i].observed_statistic, 21 - i, marker='o', color = '#FF7F50', markersize= 8, zorder=2)
         
-    if cl_tests[i].quantile >= 10e-3 and cl_tests[i].quantile < 10e-2:
+    if cl_tests[i].quantile >= 10e-4 and cl_tests[i].quantile < 10e-3:
          ax_cl.plot(cl_tests[i].observed_statistic, 21 - i, marker='o', color = 'gold', markersize= 8, zorder=2)
         
-    if cl_tests[i].quantile >= 10e-2 and cl_tests[i].quantile < 0.025:
+    if cl_tests[i].quantile >= 10e-3 and cl_tests[i].quantile < 0.025:
         ax_cl.plot(cl_tests[i].observed_statistic, 21 - i, marker='o', color = 'white', markersize= 8, zorder=2)
         
     if cl_tests[i].quantile >= 0.025 and cl_tests[i].quantile < 0.05:
         ax_cl.plot(cl_tests[i].observed_statistic, 21 - i, marker='o', color = 'skyblue', markersize= 8, zorder=2)    
     
-    if cl_tests[i].quantile > 0.05:
+    if cl_tests[i].quantile >= 0.05:
          ax_cl.plot(cl_tests[i].observed_statistic, 21 - i, marker='o', color = 'blue', markersize= 8, zorder=2)     
 
 
-legend_elements = [Line2D([0], [0], marker='o', color='red', lw=0, label=r'p < 10e-4', markersize=10, markeredgecolor='k'),
-                   Line2D([0], [0], marker='o', color='#FF7F50', lw=0, label=r'10e-4 $\leq$ p < 10e-3', markersize=10, markeredgecolor='k'),
-                   Line2D([0], [0], marker='o', color='gold', lw=0, label=r'10e-3 $\leq$ p < 10e-2', markersize=10, markeredgecolor='k'),
-                   Line2D([0], [0], marker='o', color='white', lw=0, label=r'10e-2 $\leq$ p < 0.025', markersize=10, markeredgecolor='k'),
+legend_elements = [Line2D([0], [0], marker='o', color='red', lw=0, label=r'p < 10e-5', markersize=10, markeredgecolor='k'),
+                   Line2D([0], [0], marker='o', color='#FF7F50', lw=0, label=r'10e-5 $\leq$ p < 10e-4', markersize=10, markeredgecolor='k'),
+                   Line2D([0], [0], marker='o', color='gold', lw=0, label=r'10e-4 $\leq$ p < 10e-3', markersize=10, markeredgecolor='k'),
+                   Line2D([0], [0], marker='o', color='white', lw=0, label=r'10e-3 $\leq$ p < 0.025', markersize=10, markeredgecolor='k'),
                    Line2D([0], [0], marker='o', color='skyblue', lw=0, label=r'0.025 $\leq$ p < 0.05', markersize=10, markeredgecolor='k'),
-                   Line2D([0], [0], marker='o', color='blue', lw=0, label=r'p > 0.05', markersize=10, markeredgecolor='k')]
+                   Line2D([0], [0], marker='o', color='blue', lw=0, label=r'p $\geq$ 0.05', markersize=10, markeredgecolor='k')]
 
 ax_cl.legend(handles=legend_elements, loc=3, fontsize=13, edgecolor='k')          
   
@@ -2539,7 +2554,7 @@ plt.savefig('./output/Fig9a.png', dpi=150, bbox_inches = 'tight')
 
 # Binary cL-test:
 
-# In[209]:
+# In[78]:
 
 
 def conditional_likelihood_test_bi(gridded_forecast, observed_catalog, num_simulations=1000, seed=None, random_numbers=None, verbose=False):
@@ -2590,7 +2605,7 @@ def conditional_likelihood_test_bi(gridded_forecast, observed_catalog, num_simul
     return result
 
 
-# In[210]:
+# In[79]:
 
 
 #Conditional-likelihood-tests for earthquake forecasts in California
@@ -2620,7 +2635,7 @@ cltest_HKJ_Ward_seis_bi = conditional_likelihood_test_bi(HKJ_Ward_seisf, catalog
 cltest_HKJ_Ward_sim_bi = conditional_likelihood_test_bi(HKJ_Ward_simf, catalog_Ward, seed=seed)
 
 
-# In[211]:
+# In[80]:
 
 
 plt.figure()
@@ -2643,22 +2658,22 @@ for i in range(len(cl_tests_bi)):
     ax_cl.errorbar(cl_tests_bi[i].observed_statistic, 21 -i, xerr=numpy.array([[low97, high97]]).T, capsize=4, 
                   color='slategray', alpha=1.0, zorder=0) 
     
-    if cl_tests_bi[i].quantile < 10e-4:
+    if cl_tests_bi[i].quantile < 10e-5:
          ax_cl.plot(cl_tests_bi[i].observed_statistic, 21 - i, marker='o', color = 'red', markersize= 8, zorder=2)
     
-    if cl_tests_bi[i].quantile >= 10e-4 and cl_tests_bi[i].quantile < 10e-3:
+    if cl_tests_bi[i].quantile >= 10e-5 and cl_tests_bi[i].quantile < 10e-4:
          ax_cl.plot(cl_tests_bi[i].observed_statistic, 21 - i, marker='o', color = '#FF7F50', markersize= 8, zorder=2)
         
-    if cl_tests_bi[i].quantile >= 10e-3 and cl_tests_bi[i].quantile < 10e-2:
+    if cl_tests_bi[i].quantile >= 10e-4 and cl_tests_bi[i].quantile < 10e-3:
          ax_cl.plot(cl_tests_bi[i].observed_statistic, 21 - i, marker='o', color = 'gold', markersize= 8, zorder=2)
         
-    if cl_tests_bi[i].quantile >= 10e-2 and cl_tests_bi[i].quantile < 0.025:
+    if cl_tests_bi[i].quantile >= 10e-3 and cl_tests_bi[i].quantile < 0.025:
         ax_cl.plot(cl_tests_bi[i].observed_statistic, 21 - i, marker='o', color = 'white', markersize= 8, zorder=2)
         
     if cl_tests_bi[i].quantile >= 0.025 and cl_tests_bi[i].quantile < 0.05:
         ax_cl.plot(cl_tests_bi[i].observed_statistic, 21 - i, marker='o', color = 'skyblue', markersize= 8, zorder=2)    
     
-    if cl_tests_bi[i].quantile > 0.05:
+    if cl_tests_bi[i].quantile >= 0.05:
          ax_cl.plot(cl_tests_bi[i].observed_statistic, 21 - i, marker='o', color = 'blue', markersize= 8, zorder=2)
     
 
@@ -2676,7 +2691,7 @@ plt.savefig('./output/Fig9b.png', dpi=150, bbox_inches = 'tight')
 
 # ### Comparative T tests:
 
-# In[8]:
+# In[81]:
 
 
 def _t_test_ndarray(target_event_rates1, target_event_rates2, n_obs, n_f1, n_f2, alpha=0.05):
@@ -2732,9 +2747,15 @@ def _t_test_ndarray(target_event_rates1, target_event_rates2, n_obs, n_f1, n_f2,
             'ig_upper': ig_upper}
 
 
+# In[ ]:
+
+
+print ('Conducting comparative tests...')
+
+
 # ### Poisson T-test:
 
-# In[29]:
+# In[82]:
 
 
 # Comparative T-tests between earthquake forecasts in California:
@@ -2763,7 +2784,7 @@ ttest_HKJ_Ward_seis = poisson.paired_t_test(HKJ_Ward_seisf, HKJ_Wardf_sca, catal
 ttest_HKJ_Ward_sim = poisson.paired_t_test(HKJ_Ward_simf, HKJ_Wardf_sca, catalog_Ward)
 
 
-# In[30]:
+# In[83]:
 
 
 def plot_comparison_test(results_t, plot_args=None):
@@ -2805,7 +2826,7 @@ def plot_comparison_test(results_t, plot_args=None):
     return ax
 
 
-# In[31]:
+# In[84]:
 
 
 plt.figure()
@@ -2830,19 +2851,19 @@ ax_ct.yaxis.tick_left()
 ax_ct.yaxis.set_label_position("left")
 ax_ct.set_title('')
 ax_ct.set_ylim(-5,2)
-plt.plot ((7.5, 7.5), (2, -5), color='black', linewidth=1)
-plt.plot((14.5, 14.5), (2, -5), color='black', linewidth=1)
+ax_ct.axline((7.5, 3), (7.5, 1), color='black', linewidth=1)
+ax_ct.axline((14.5, 3), (14.5, 1), color='black', linewidth=1)
 ax_ct.text(21.7, -0.05, 'HKJ', fontsize=14)
 ax_ct.text(1.8, 1, f'{catalog_Cali2.get_number_of_events()} eqks', fontsize=14)
 ax_ct.text(9.5, 1, f'{catalog_Shen.get_number_of_events()} eqks', fontsize=14)
 ax_ct.text(16.3, 1, f'{catalog_Ward.get_number_of_events()} eqks', fontsize=14)
 ax_ct.text(-1., 2.5, 'a)', fontsize =18, color='black')
-plt.savefig('./output/Fig10a.png', dpi=150, bbox_inches = 'tight')
+plt.savefig('./output/Fig10a.png', dpi=200, bbox_inches = 'tight')
 
 
 # #### Binary T-test:
 
-# In[32]:
+# In[85]:
 
 
 def _t_test_ndarray_bi(target_event_rates1, target_event_rates2, n_obs, n_f1, n_f2, catalog, alpha=0.05):
@@ -2900,7 +2921,7 @@ def _t_test_ndarray_bi(target_event_rates1, target_event_rates2, n_obs, n_f1, n_
             'ig_upper': ig_upper}
 
 
-# In[33]:
+# In[86]:
 
 
 def paired_t_test_bi(forecast, benchmark_forecast, observed_catalog, alpha=0.05, scale=False):
@@ -2946,7 +2967,7 @@ def paired_t_test_bi(forecast, benchmark_forecast, observed_catalog, alpha=0.05,
     return result
 
 
-# In[34]:
+# In[87]:
 
 
 # Comparative T-tests between earthquake forecasts in California:
@@ -2975,7 +2996,7 @@ ttest_HKJ_Ward_seis = paired_t_test_bi(HKJ_Ward_seisf, HKJ_Wardf_sca, catalog_Wa
 ttest_HKJ_Ward_sim = paired_t_test_bi(HKJ_Ward_simf, HKJ_Wardf_sca, catalog_Ward)
 
 
-# In[35]:
+# In[88]:
 
 
 plt.figure()
@@ -3002,18 +3023,18 @@ ax_ct.yaxis.tick_right()
 ax_ct.yaxis.set_label_position("right")
 ax_ct.set_title('')
 ax_ct.set_ylim(-5,2)
-plt.plot ((7.5, 7.5), (2, -5), color='black', linewidth=1)
-plt.plot((14.5, 14.5), (2, -5), color='black', linewidth=1)
+ax_ct.axline((7.5, 3), (7.5, 1), color='black', linewidth=1)
+ax_ct.axline((14.5, 3), (14.5, 1), color='black', linewidth=1)
 ax_ct.text(1.8, 1, f'{len(np.unique(np.nonzero(catalog_Cali2.spatial_magnitude_counts().ravel())))} bins', fontsize=14)
 ax_ct.text(9.5, 1, f'{len(np.unique(np.nonzero(catalog_Shen.spatial_magnitude_counts().ravel())))} bins', fontsize=14)
 ax_ct.text(16.3, 1, f'{len(np.unique(np.nonzero(catalog_Ward.spatial_magnitude_counts().ravel())))} bins', fontsize=14)
 ax_ct.text(-1., 2.5, 'b)', fontsize =18, color='black')
-plt.savefig('./output/Fig10b.png', dpi=150, bbox_inches = 'tight')
+plt.savefig('./output/Fig10b.png', dpi=200, bbox_inches = 'tight')
 
 
 # #### Fig. 10: Comparison of information gains T-test results. Information gains per a) earthqauke and b) active bin are presented as tringles and circles, depending on their relative values to that of the HKJ model: blue triangles debote that the model is statistically as informative as HKJ and red circles indicate that a model is significantly less informative than HKJ.
 
-# In[198]:
+# In[89]:
 
 
 data_s = pd.DataFrame()
@@ -3022,7 +3043,7 @@ data_s['POLLs'] = POLL_HKJ
 data_s['BILLs'] = BILL_HKJ
 
 
-# In[199]:
+# In[90]:
 
 
 LL_0 = data_s[data_s['EQs'] == 0.0]
@@ -3032,7 +3053,7 @@ LL_3 = data_s[data_s['EQs'] == 3.0]
 LL_4 = data_s[data_s['EQs'] == 4.0]
 
 
-# In[200]:
+# In[91]:
 
 
 jPOLL = sum(data_s.POLLs)
@@ -3049,7 +3070,7 @@ for i in range(len(POLLs_sc)):
     per_BILLs[i] = BILLs_sc[i] * (100 /jBILL)
 
 
-# In[201]:
+# In[92]:
 
 
 fig, ax = plt.subplots(figsize=(7,5))
@@ -3095,7 +3116,13 @@ legend_elements = [Line2D([0], [0], marker='s', color='black', lw=0, label='POLL
                    Line2D([0], [0], marker='o', color='black', lw=0, label='BILLs', markersize=8, markerfacecolor="None")]
 ax.legend(handles=legend_elements, loc=1, fontsize=13, edgecolor='black')
 
-plt.savefig('./output/Fig11.png', dpi=150, bbox_inches = 'tight')
+plt.savefig('./output/Fig11.png', dpi=100, bbox_inches = 'tight')
 
 
 # #### Fig. 11: Percentage of the observed joint log-likelihood score obtained by the HKJ model that is due to the occurrence of zero (red), one (blue), two (green), three (purple) and four (orange) events in single spatial cells. We represent POLLs and BILLs with squares and circles, respectively.
+
+# In[ ]:
+
+
+print ('Done! :o)')'
+
