@@ -11,7 +11,10 @@ The scripts to execute the experiment can be found in the `code` directory of th
 in the Terminal.
 
 ## Software dependencies
-python=3.10.1 pycsep=0.5.0
+python=3.10.1  
+numpy=1.21.5  
+pycsep=0.5.0  
+
 
 ## Software dependencies
 In order to run this reproducibility package, the user must have a pycsep environment installed and running on her/his machine ('gji-hybrids' in this example). The easiest way to install
@@ -20,13 +23,13 @@ pycsep is using `conda`, however; it can also be installed using `pip` or built 
 ```
 conda create -n gji-hybrids
 conda activate gji-hybrids
-conda install --channel conda-forge pycsep
+conda install --channel conda-forge numpy=1.21.5 pycsep=0.5.0
 ```
 
-In addition, the user must have access to a Unix shell that has python3 intsalled with the `requests` library. She/he can install this library using:
+In addition, the user must have access to a Unix shell that has python3 intsalled with the `requests` library (it should be provided with pycsep=0.5.0). If not, she/he can install this library using:
 
 ```
-pip install requests
+conda install requests
 ```
 
 ## Instructions for running 
