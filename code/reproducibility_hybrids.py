@@ -2858,7 +2858,7 @@ ax_ct.text(1.8, 1, f'{catalog_Cali2.get_number_of_events()} eqks', fontsize=14)
 ax_ct.text(9.5, 1, f'{catalog_Shen.get_number_of_events()} eqks', fontsize=14)
 ax_ct.text(16.3, 1, f'{catalog_Ward.get_number_of_events()} eqks', fontsize=14)
 ax_ct.text(-1., 2.5, 'a)', fontsize =18, color='black')
-plt.savefig('./output/Fig10a.png', dpi=200, bbox_inches = 'tight')
+plt.savefig('./output/Fig10a.png', dpi=150, bbox_inches = 'tight')
 
 
 # #### Binary T-test:
@@ -3029,7 +3029,7 @@ ax_ct.text(1.8, 1, f'{len(np.unique(np.nonzero(catalog_Cali2.spatial_magnitude_c
 ax_ct.text(9.5, 1, f'{len(np.unique(np.nonzero(catalog_Shen.spatial_magnitude_counts().ravel())))} bins', fontsize=14)
 ax_ct.text(16.3, 1, f'{len(np.unique(np.nonzero(catalog_Ward.spatial_magnitude_counts().ravel())))} bins', fontsize=14)
 ax_ct.text(-1., 2.5, 'b)', fontsize =18, color='black')
-plt.savefig('./output/Fig10b.png', dpi=200, bbox_inches = 'tight')
+plt.savefig('./output/Fig10b.png', dpi=150, bbox_inches = 'tight')
 
 
 # #### Fig. 10: Comparison of information gains T-test results. Information gains per a) earthqauke and b) active bin are presented as tringles and circles, depending on their relative values to that of the HKJ model: blue triangles debote that the model is statistically as informative as HKJ and red circles indicate that a model is significantly less informative than HKJ.
@@ -3116,7 +3116,7 @@ legend_elements = [Line2D([0], [0], marker='s', color='black', lw=0, label='POLL
                    Line2D([0], [0], marker='o', color='black', lw=0, label='BILLs', markersize=8, markerfacecolor="None")]
 ax.legend(handles=legend_elements, loc=1, fontsize=13, edgecolor='black')
 
-plt.savefig('./output/Fig11.png', dpi=100, bbox_inches = 'tight')
+plt.savefig('./output/Fig11.png', dpi=150, bbox_inches = 'tight')
 
 
 # #### Fig. 11: Percentage of the observed joint log-likelihood score obtained by the HKJ model that is due to the occurrence of zero (red), one (blue), two (green), three (purple) and four (orange) events in single spatial cells. We represent POLLs and BILLs with squares and circles, respectively.
