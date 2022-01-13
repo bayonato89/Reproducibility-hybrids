@@ -1,6 +1,6 @@
 # Reproducing prospective test results for RELM and hybrid earthquake forecasting models for California
 This repository provides data and code to reproduce prospective test results for six RELM and sixteen multiplicative 
-hybrid earthquake forecasting models for California, reported by Bayona et al. (GJI; in review). This experiment
+hybrid earthquake forecasting models for California, reported by Bayona et al. (2022). This experiment
 takes about 2 hours on a modern desktop computer if the number of simulations per forecast and per test (expect for the Poisson and NBD N-tests) is set to 1000.
 
 ## Code description 
